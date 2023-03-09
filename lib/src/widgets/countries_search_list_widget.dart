@@ -24,8 +24,7 @@ class CountrySearchListWidget extends StatefulWidget {
   });
 
   @override
-  _CountrySearchListWidgetState createState() =>
-      _CountrySearchListWidgetState();
+  _CountrySearchListWidgetState createState() => _CountrySearchListWidgetState();
 }
 
 class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
@@ -150,21 +149,24 @@ class DirectionalCountryListTile extends StatelessWidget {
     return ListTile(
       key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
       leading: (showFlags ? _Flag(country: country, useEmoji: useEmoji) : null),
-      title: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Text(
-          '${Utils.getCountryName(country, locale)}',
-          textDirection: Directionality.of(context),
-          textAlign: TextAlign.start,
+      title:Text(
+        country.dialCode ?? '',
+        textDirection: TextDirection.ltr,
+        textAlign: TextAlign.left,
+        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontSize: 15,
+          fontFamily: 'roboto',
+          color: Colors.black,
         ),
       ),
-      subtitle: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Text(
-          '${country.dialCode ?? ''}',
-          textDirection: TextDirection.ltr,
-          textAlign: TextAlign.start,
-        ),
+      subtitle:Text(
+        '${Utils.getCountryName(country, locale)}',
+        textDirection: Directionality.of(context),
+        textAlign: TextAlign.start,
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 15, fontFamily: 'roboto'),
       ),
       onTap: () => Navigator.of(context).pop(country),
     );
